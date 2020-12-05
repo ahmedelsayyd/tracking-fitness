@@ -1,0 +1,24 @@
+<section>
+    <form [formGroup]="loginForm" fxLayout="column" fxLayoutGap="8px" fxLayoutAlign="center center"
+        (ngSubmit)="onSubmit()">
+        <mat-form-field>
+            <mat-label>Your email</mat-label>
+            <input formControlName="email" type="email" placeholder="your email" matInput>
+            <mat-error *ngIf="loginForm.get('email').errors?.email && !loginForm.errors?.required">email is not valid.
+            </mat-error>
+            <mat-error *ngIf="loginForm.get('email').errors?.required">field must be not empty. </mat-error>
+        </mat-form-field>
+
+        <mat-form-field hintLabel="should be at least 6 characters">
+            <mat-label>Your password</mat-label>
+            <input formControlName="password" type="password" placeholder="your password" matInput>
+            <!-- <mat-hint>should be at least 6 characters</mat-hint> -->
+            <mat-hint align="end">{{loginForm.value?.password.length}} / 6</mat-hint>
+            <mat-error>has to be 6 character at least.</mat-error>
+        </mat-form-field>
+
+        <button *ngIf="!(isLoading$ | async)" type="submit" mat-raised-button color="primary"
+            [disabled]="!loginForm.valid">Submit</button>
+        <mat-spinner *ngIf="isLoading$ | async"></mat-spinner>
+    </form>
+</section>

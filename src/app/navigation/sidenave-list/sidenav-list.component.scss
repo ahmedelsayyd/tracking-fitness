@@ -1,0 +1,17 @@
+.nav-list{
+    list-style: none;
+    padding: 0;
+    margin-right: 45px;
+
+    .nav-link{
+        text-decoration: none;
+        color: white;
+        font-size: 18px;
+        font-weight: 400;
+        text-transform: uppercase;
+
+        &:hover, :visited{
+            color: lightgrey;
+        }
+    }
+}

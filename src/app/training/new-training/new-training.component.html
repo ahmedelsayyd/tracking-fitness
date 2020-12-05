@@ -1,0 +1,26 @@
+<section class="new-taining" fxLayout fxLayoutAlign="center">
+
+    <form (ngSubmit)="startNewTraing(f)" #f=ngForm>
+
+        <mat-card fxLayout="column" fxLayoutAlign="center center" fxFlex="350px" fxFlex.lt-sm="100%">
+            <mat-card-title>Time To Start Workout</mat-card-title>
+            <mat-card-content>
+                <mat-form-field appearance="fill" *ngIf="!(isLoaded$ | async) && exercises$ | async">
+                    <mat-label>Choose Exercise</mat-label>
+                    <mat-select ngModel name="exercise" required>
+                        <mat-option *ngFor="let ex of exercises$ | async" [value]="ex.id">{{ex.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-spinner *ngIf="isLoaded$ | async "></mat-spinner>
+            </mat-card-content>
+            <mat-card-actions>
+                <button *ngIf="exercises$ | async" mat-stroked-button type="submit"
+                    [disabled]="f.invalid">Start</button>
+                <button *ngIf="!(exercises$ |async) && !(isLoaded$ | async)" mat-stroked-button type="button"
+                    (click)="fetchExercises()">Fetch
+                    Again</button>
+
+            </mat-card-actions>
+        </mat-card>
+    </form>
+</section>
